@@ -11,7 +11,6 @@ const app = new Koa({
 
 // 错误处理(需要在注册路由之前注册)
 app.use(errorHandler);
-
 // // 初始化数据库
 // initDataBase();
 
