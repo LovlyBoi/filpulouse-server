@@ -12,12 +12,13 @@ function parsePort(port: string | undefined): number | undefined {
 let mainConnections: Pool | null = null;
 
 try {
+  console.log('################### createPool....')
   mainConnections = mysql.createPool({
-    database: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    host: process.env.DB_HOST,
-    port: parsePort(process.env.DB_PORT),
+    database: 'lvsiying',
+    user: 'root',
+    password: 'zxc,./123',
+    host: '127.0.0.1',
+    port: parsePort('3306'),
   });
   console.log(`🔗 连接数据库 \`${process.env.DB_NAME}\` ...`);
 } catch (e) {

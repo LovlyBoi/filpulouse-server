@@ -1,6 +1,6 @@
 import jwt = require('jsonwebtoken');
 
-console.log(process.env);
+
 
 class Token {
   // 签署token
@@ -52,5 +52,5 @@ class Token {
   };
 }
 
-const token = new Token();
-export { token };
+const tokenUtil = new Token();
+export { tokenUtil };

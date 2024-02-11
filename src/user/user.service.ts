@@ -1,33 +1,28 @@
+import { IsEmpty } from "../util/StringUtils";
 import { HTTP_BAD_REQUEST_ERROR } from "../app/errors/httpErrors";
 import {queryALLUser,findOneByAccount} from "./user.dao"
-class CatService {
-  cats = [
-    {
-      id: "1",
-      name: "Cat1",
-      age: 3,
-    },
-    {
-      id: "2",
-      name: "Cat2",
-      age: 2,
-    },
-    {
-      id: "3",
-      name: "Cat3",
-      age: 1,
-    },
-  ];
+import {HttpError} from '../app/errors/httpErrors'
+import {compare,hash} from "../util/bcrypt"
+import { BussinessErrors } from "../app/errors/BussinsessErrors";
 
-  getAllCats() {
-    // 如果有错，也可以直接在service层抛出去
-    // throw HTTP_BAD_REQUEST_ERROR;
-    return this.cats;
+class UserService {
+
+  async getByAccount(id: any) {
+    return (await findOneByAccount(id))[0];
   }
 
-  getCatById(id: string) {
-    return this.cats.find((cat) => cat.id === id);
+  async login(account:any , password:any){
+    const user = await findOneByAccount(account);
+    if(IsEmpty(user[0])){
+      throw new HttpError(200,{code:50002,msg:"账号不存在"});
+    }
+    const r = await compare(password,user[0].password)
+    if (!r){
+      throw new BussinessErrors(50003,"账号密码不正确");
+    }
   }
+
+
 }
 
-export const catService = new CatService();
+export const userService = new UserService();

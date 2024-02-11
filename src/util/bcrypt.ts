@@ -11,13 +11,4 @@ export function hash(password: string): Promise<string> {
     });
   });
 }
-
-export function match(origin:string ,password:string):Boolean{
-  let r = hash(password).then((val)=>{
-    return val;
-  })
-
-  return String.apply(r)==origin;
-}
-
 export const compare = bcrypt.compare;

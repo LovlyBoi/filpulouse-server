@@ -21,16 +21,9 @@ class CatController {
     if (ctx.headers['token'] == null ){
       throw HTTP_UNAUTHORIZED_ERROR;
     }
-
-
-
       next()
 
   };
-
-
-
-
 
   findOne: Middleware = async (ctx, next) => {
     const id = ctx.params.id;
