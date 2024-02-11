@@ -1,4 +1,4 @@
-import {insert,findOneByAccount,query,countQuery} from "./translationRecord.dao"
+import {insert,findOneByAccount,query,countQuery,unStar} from "./translationRecord.dao"
 import {HttpError} from '../app/errors/httpErrors'
 import {compare,hash} from "../util/bcrypt"
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
@@ -31,10 +31,15 @@ class TranslationRecordService {
         count:count['count'],
         pageNumber:page.pageNumber ,
         pageSize : page.pageSize,
+        hasNext: page.pageNumber*page.pageSize <count['count'],
         list:list,
     };
   }
-
+  async unStar(translationRecordId:any,userId:any){
+    const r  = await unStar(translationRecordId,userId);
+    return r.affectedRows===1;
+  }
+  
 
 }
 

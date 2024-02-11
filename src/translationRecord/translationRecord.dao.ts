@@ -51,7 +51,10 @@ export async function countQuery(userId:any,start:any ,end :any) {
 
 
 
-
+export async function unStar(translationRecordId:any,userId:any) {
+  const result = await pool.execute(`DELETE from translation_record where id = ? AND user_id = ? `, [translationRecordId,userId]) as unknown as any[];
+  return result[0];
+}
 export async function findOneByAccount(account:string) {
   const result = await pool.execute(`select * from user where account = ?`, [account]) as unknown as any[];
   return result[0];

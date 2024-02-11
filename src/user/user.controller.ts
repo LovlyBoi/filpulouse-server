@@ -5,6 +5,7 @@ import { HTTP_UNAUTHORIZED_ERROR} from "../app/errors/httpErrors"
 import { NotEmpty , IsEmpty} from '../util/StringUtils'
 import {HttpError} from '../app/errors/httpErrors'
 import {tokenUtil} from '../util/jwtUtil'
+import { BussinessErrors } from "../app/errors/BussinsessErrors";
 
 class UserController {
 
@@ -42,6 +43,18 @@ class UserController {
     // 直接抛出错误，交给统一错误处理
     if (!cat) throw HTTP_NOT_FOUND_ERROR;
     ctx.body = cat;
+  }
+
+  register: Middleware = async (ctx, next) => {
+    const body = ctx.request.body as any
+    console.log(body)
+    if (! await userService.register(body.account,body.password)){
+      throw new BussinessErrors(50000,"注册失败");
+    }
+    ctx.body = {
+      code:200,
+      msg:"success"
+    }
   }
 
 

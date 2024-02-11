@@ -39,6 +39,7 @@ class ArticleUserRelationService{
         count:count['count'],
         pageNumber:page.pageNumber ,
         pageSize : page.pageSize,
+        hasNext: page.pageNumber*page.pageSize <count['count'],
         list:list,
     };
   }

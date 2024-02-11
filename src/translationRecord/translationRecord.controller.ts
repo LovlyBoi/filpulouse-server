@@ -52,6 +52,18 @@ class TranslationRecordController {
   }
 
 
+  unStarById: Middleware = async (ctx,next) =>{
+    const translationRecordId = (ctx.request.body as any ).translationRecordId 
+    const userId  = ctx.tokenData.userId;
+    if (! await translationRecordService.unStar(translationRecordId,userId)){
+      throw new BussinessErrors(50000,"取消失败")
+    }
+    ctx.body = {
+      code:200,
+      msg:"success"
+    }
+  }
+
 
 }
 
