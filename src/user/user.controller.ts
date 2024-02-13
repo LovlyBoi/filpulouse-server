@@ -35,6 +35,8 @@ class UserController {
       });
     } catch (error) {
       console.log(error)
+      ctx.status = 500;
+      ctx.body = "Internal Server Error";
     }
     ctx.body = { code: 200, msg: "success", data: { token: userToken } };
   };
