@@ -26,11 +26,16 @@ class UserController {
 
     //获得token
     const user = await userService.getByAccount(account);
-    const userToken = await tokenUtil.signToken({
-      account,
-      userId: user.id,
-      enable: user.enable,
-    });
+    let userToken;
+    try {
+      userToken = await tokenUtil.signToken({
+        account,
+        userId: user.id,
+        enable: user.enable,
+      });
+    } catch (error) {
+      console.log(error)
+    }
     ctx.body = { code: 200, msg: "success", data: { token: userToken } };
   };
 

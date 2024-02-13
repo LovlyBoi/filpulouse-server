@@ -1,19 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : 本机MySQL
- Source Server Type    : MySQL
- Source Server Version : 80029
- Source Host           : localhost:3306
- Source Schema         : lvsiying
-
- Target Server Type    : MySQL
- Target Server Version : 80029
- File Encoding         : 65001
-
- Date: 13/02/2024 13:03:52
-*/
-
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -36,11 +20,6 @@ CREATE TABLE `article`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of article
--- ----------------------------
-INSERT INTO `article` VALUES (1, '2024-02-11', 'hello', 'www.baidu.com', 'abc', 'abc', NULL, NULL, NULL, NULL);
-
--- ----------------------------
 -- Table structure for translation_record
 -- ----------------------------
 DROP TABLE IF EXISTS `translation_record`;
@@ -54,13 +33,6 @@ CREATE TABLE `translation_record`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Records of translation_record
--- ----------------------------
-INSERT INTO `translation_record` VALUES (4, '2024-02-11', 1, 'hello', '你好', 1);
-INSERT INTO `translation_record` VALUES (5, '2024-02-11', 1, 'hello', '你好', 1);
-INSERT INTO `translation_record` VALUES (6, '2024-02-11', 1, 'hello', '你好', 1);
-INSERT INTO `translation_record` VALUES (8, '2024-02-11', 1, 'hello', '你好1', 1);
 
 -- ----------------------------
 -- Table structure for user
@@ -77,13 +49,6 @@ CREATE TABLE `user`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', '$2a$10$3sudGTdcOPbmSVG26NKxJucb8jtSr8xLeHOomlkJubc/PHbxdziky', '2024-02-11', 1);
-INSERT INTO `user` VALUES (2, 'abc', '$2a$10$tMDypXgHjDhn7wsK2PP9z.VUWEAsY6iTTtuxN0Pw3mjGVXntcCjIm', '2024-02-11', 1);
-INSERT INTO `user` VALUES (7, 'ab111c', '$2a$10$cYoPqkbiIsALUy5HYbJ3detRhbpLQ2k5GzGCoFDcFRMQkLCuj2qqa', '2024-02-11', 1);
-
--- ----------------------------
 -- Table structure for user_article_relation
 -- ----------------------------
 DROP TABLE IF EXISTS `user_article_relation`;
@@ -94,10 +59,5 @@ CREATE TABLE `user_article_relation`  (
   PRIMARY KEY (`user_id`, `article_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
--- ----------------------------
--- Records of user_article_relation
--- ----------------------------
-INSERT INTO `user_article_relation` VALUES (1, 1, '2024-02-11');
-INSERT INTO `user_article_relation` VALUES (1, 2, '2024-02-11');
 
 SET FOREIGN_KEY_CHECKS = 1;
