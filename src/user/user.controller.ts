@@ -8,7 +8,6 @@ import { tokenUtil } from "../util/jwtUtil";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
 
 class UserController {
-
   check: Middleware = async (ctx, next) => {
     const token = ctx.headers["token"] as string;
     if (token == null) {
@@ -41,11 +40,15 @@ class UserController {
         enable: user.enable,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       ctx.status = 500;
       ctx.body = "Internal Server Error";
     }
-    ctx.body = { code: 200, msg: "success", data: { token: userToken } };
+    ctx.body = {
+      code: 200,
+      msg: "success",
+      data: { token: userToken, username: account },
+    };
   };
 
   findOne: Middleware = async (ctx, next) => {
@@ -56,8 +59,6 @@ class UserController {
     ctx.body = cat;
   };
 
-
-  
   register: Middleware = async (ctx, next) => {
     const body = ctx.request.body as any;
     console.log(body);
@@ -70,19 +71,21 @@ class UserController {
     let userToken;
     try {
       userToken = await tokenUtil.signToken({
-        account:body.account,
+        account: body.account,
         userId: user.id,
         enable: user.enable,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       ctx.status = 500;
       ctx.body = "Internal Server Error";
     }
-    ctx.body = { code: 200, msg: "success", data: { token: userToken ,username:body.account} };
+    ctx.body = {
+      code: 200,
+      msg: "success",
+      data: { token: userToken, username: body.account },
+    };
   };
-
-
 }
 
 export const userController = new UserController();
