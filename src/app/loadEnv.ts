@@ -40,7 +40,7 @@ function loadEnv(...envs: (object | undefined)[]) {
 const env = loadEnv(
   {},
   envError ? {} : envParsed,
-  localEnvError ? {} : localEnvParsed
+  localEnvError ? {} : localEnvParsed,
 );
 
 Object.assign(process.env, env);

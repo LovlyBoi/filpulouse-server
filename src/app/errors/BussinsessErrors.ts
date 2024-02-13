@@ -1,4 +1,6 @@
 export class BussinessErrors {
-    constructor(public code: number, public msg: string) {}
-  }
-  
+  constructor(
+    public code: number,
+    public msg: string,
+  ) {}
+}
