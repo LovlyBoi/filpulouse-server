@@ -1,12 +1,10 @@
-import jwt = require('jsonwebtoken');
-
-
+import jwt = require("jsonwebtoken");
 
 class Token {
   // 签署token
   signToken = (
     payload: object,
-    exp: string | number = Math.floor(Date.now() / 1000) + 60 * 60 * 2*10000,
+    exp: string | number = Math.floor(Date.now() / 1000) + 60 * 60 * 2 * 10000,
   ) => {
     // ToDo: 封装jwt签署token。默认2小时失效
     return new Promise<string>((resolve, reject) => {

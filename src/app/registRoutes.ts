@@ -13,7 +13,7 @@ const routes: KoaRouter[] = [
   userRouter,
   translationRecordRouter,
   articleRouter,
-  articleUserRelationRouter
+  articleUserRelationRouter,
 ];
 
 export function registRoutes(app: Koa<Koa.DefaultState, Koa.DefaultContext>) {
