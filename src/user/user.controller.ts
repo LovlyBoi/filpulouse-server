@@ -8,11 +8,18 @@ import { tokenUtil } from "../util/jwtUtil";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
 
 class UserController {
+
   check: Middleware = async (ctx, next) => {
-    if (ctx.headers["token"] == null) {
+    const token = ctx.headers["token"] as string;
+    if (token == null) {
       throw HTTP_UNAUTHORIZED_ERROR;
     }
-    next();
+    const v = await tokenUtil.verifyToken(token);
+    if (v[0] !== true) {
+      throw new BussinessErrors(50000, "token错误");
+    }
+    ctx.tokenData = v[1];
+    await next();
   };
 
   login: Middleware = async (ctx, next) => {
@@ -49,17 +56,33 @@ class UserController {
     ctx.body = cat;
   };
 
+
+  
   register: Middleware = async (ctx, next) => {
     const body = ctx.request.body as any;
     console.log(body);
     if (!(await userService.register(body.account, body.password))) {
       throw new BussinessErrors(50000, "注册失败");
     }
-    ctx.body = {
-      code: 200,
-      msg: "success",
-    };
+
+    //获得token
+    const user = await userService.getByAccount(body.account);
+    let userToken;
+    try {
+      userToken = await tokenUtil.signToken({
+        account:body.account,
+        userId: user.id,
+        enable: user.enable,
+      });
+    } catch (error) {
+      console.log(error)
+      ctx.status = 500;
+      ctx.body = "Internal Server Error";
+    }
+    ctx.body = { code: 200, msg: "success", data: { token: userToken } };
   };
+
+
 }
 
 export const userController = new UserController();
