@@ -23,10 +23,10 @@ export async function findOneByAccount(account: string) {
   return result[0];
 }
 
-
 export async function isExist(account: any) {
-  const result = (await pool.execute(`select COUNT(1) from user where account = ?`, [
-    account,
-  ])) as unknown as any[];
+  const result = (await pool.execute(
+    `select COUNT(1) from user where account = ?`,
+    [account],
+  )) as unknown as any[];
   return result[0];
 }

@@ -7,6 +7,7 @@
     "dev": "nodemon --exec \"ts-node\" main.ts"
   },
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
     "jsonwebtoken": "^9.0.2",
@@ -24,6 +25,7 @@
     "@types/koa-bodyparser": "^4.3.12",
     "@types/koa-multer": "^1.0.4",
     "@types/koa-router": "^7.4.8",
+    "@types/koa__cors": "^5.0.0",
     "@types/node": "^20.11.3",
     "nodemon": "^3.0.2",
     "prettier": "^3.2.2",

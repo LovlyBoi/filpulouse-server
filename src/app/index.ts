@@ -1,4 +1,5 @@
 import Koa from "koa";
+import cors from '@koa/cors'
 import bodyParser from "koa-bodyparser";
 import { registRoutes } from "./registRoutes";
 import { errorHandler } from "./errors/errorHandler";
@@ -13,6 +14,8 @@ const app = new Koa({
 app.use(errorHandler);
 // // 初始化数据库
 // initDataBase();
+
+app.use(cors());
 
 // 解析请求体
 app.use(bodyParser());

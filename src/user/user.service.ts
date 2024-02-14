@@ -1,6 +1,6 @@
 import { IsEmpty } from "../util/StringUtils";
 import { HTTP_BAD_REQUEST_ERROR } from "../app/errors/httpErrors";
-import { queryALLUser, findOneByAccount, insert ,isExist} from "./user.dao";
+import { queryALLUser, findOneByAccount, insert, isExist } from "./user.dao";
 import { HttpError } from "../app/errors/httpErrors";
 import { compare, hash } from "../util/bcrypt";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
@@ -23,22 +23,18 @@ class UserService {
   }
 
   async register(account: any, password: any) {
-    if (await this.isExist(account)){
-      throw new BussinessErrors(50008,"账号已存在");
+    if (await this.isExist(account)) {
+      throw new BussinessErrors(50008, "账号已存在");
     }
-
 
     const r = await insert(account, await hash(password));
     return r.affectedRows === 1;
   }
   async isExist(account: any) {
-
     const s = await isExist(account);
-    console.log(111,s)
-    return s[0]['COUNT(1)'] >0;
+    console.log(111, s);
+    return s[0]["COUNT(1)"] > 0;
   }
-
-
 }
 
 export const userService = new UserService();
