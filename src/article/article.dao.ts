@@ -141,3 +141,12 @@ export async function findOneByAccount(account: string) {
   ])) as unknown as any[];
   return result[0];
 }
+
+
+export async function queryById(id: any) {
+  const result = (await pool.execute(`select * from article where id = ?`, [
+    id,
+  ])) as unknown as any[];
+  return result[0];
+}
+

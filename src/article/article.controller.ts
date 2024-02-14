@@ -32,6 +32,23 @@ class ArticleController {
     throw new BussinessErrors(50005, "保存失败");
   };
 
+  queryById: Middleware = async (ctx, next) => {
+    console.log(11111,ctx.query["id"])
+    const r = await articleService.queryById(ctx.query['id']);
+    if (!IsEmpty(r)){
+      ctx.body = {
+        code:200,
+        message:"success",
+        data:r
+      }
+    }
+    ctx.body = {
+      code:50010,
+      message:"no article with such id",
+      data:null
+    }
+  };
+
   page: Middleware = async (ctx, next) => {
     let pageSize = ctx.query["pageSize"];
     pageSize == null ? 10 : pageSize;

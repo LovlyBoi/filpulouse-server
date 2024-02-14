@@ -1,4 +1,4 @@
-import { insert, findOneByAccount, query, countQuery } from "./article.dao";
+import { insert, findOneByAccount, query, countQuery ,queryById} from "./article.dao";
 import { HttpError } from "../app/errors/httpErrors";
 import { compare, hash } from "../util/bcrypt";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
@@ -43,7 +43,6 @@ class ArticleService {
       source,
     );
 
-    console.log(count);
     const list = await query(
       page,
       author,
@@ -55,7 +54,6 @@ class ArticleService {
       id,
       source,
     );
-    console.log(list);
     return {
       count: count["count"],
       pageNumber: page.pageNumber,
@@ -63,6 +61,12 @@ class ArticleService {
       hasNext: page.pageNumber * page.pageSize < count["count"],
       list: list,
     };
+  }
+
+  async queryById(
+    id: any,
+  ) {
+    return (await queryById(id))[0];
   }
 }
 
