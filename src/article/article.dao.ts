@@ -16,8 +16,9 @@ import { pool } from "../app/database";
  * @returns 
  */
 export async function insert(body: any) {
+  console.log("123123",body)
   const result = (await pool.execute(
-    `INSERT INTO translation_record(create_time,title,source,author,content,tag_name,tag_color,pics,type) values (?,?,?,?,?,?,?,?)`,
+    `INSERT INTO article(create_time,title,source,author,content,tag_name,tag_color,pics,type) values (?,?,?,?,?,?,?,?,?)`,
     [
       new Date(),
       body.title,
@@ -29,7 +30,7 @@ export async function insert(body: any) {
       body.pics,
       body.type,
     ],
-  )) as unknown as any[]; // 懒得写类型，就给他强制转为any。如果你想写实体类也行
+  )) as unknown as any[]; 
   return result[0];
 }
 

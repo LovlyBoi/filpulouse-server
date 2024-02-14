@@ -30,6 +30,7 @@ class UserService {
     const r = await insert(account, await hash(password));
     return r.affectedRows === 1;
   }
+  
   async isExist(account: any) {
     const s = await isExist(account);
     console.log(111, s);
