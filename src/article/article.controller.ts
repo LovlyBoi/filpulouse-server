@@ -41,6 +41,7 @@ class ArticleController {
         message:"success",
         data:r
       }
+      return;
     }
     ctx.body = {
       code:50010,
