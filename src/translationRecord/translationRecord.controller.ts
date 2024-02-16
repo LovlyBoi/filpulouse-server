@@ -21,8 +21,8 @@ class TranslationRecordController {
 
   save: Middleware = async (ctx, next) => {
     let body = ctx.request.body as any;
-    body.articleId = ctx.tokenData.articleId;
-    console.log('1231231',body);
+    body.userId = ctx.tokenData.userId;
+
     if (IsEmpty(body)) {
       throw new BussinessErrors(50004, "save参数不能为空");
     }
@@ -59,10 +59,9 @@ class TranslationRecordController {
     const articleId = (ctx.request.body as any).articleId;
     const userId = ctx.tokenData.userId;
 
+    console.log(from, to, articleId, userId);
 
-    console.log(from,to,articleId,userId)
-
-    if (!(await translationRecordService.unStar(from,to ,articleId, userId))) {
+    if (!(await translationRecordService.unStar(from, to, articleId, userId))) {
       throw new BussinessErrors(50000, "取消失败");
     }
     ctx.body = {
@@ -72,17 +71,16 @@ class TranslationRecordController {
   };
 
   getAllByArticleId: Middleware = async (ctx, next) => {
-
-    let list = await translationRecordService.getAllByArticleId(ctx.query['articleId'])
-    console.log(list)
+    let list = await translationRecordService.getAllByArticleId(
+      ctx.query["articleId"],
+    );
+    console.log(list);
     ctx.body = {
       code: 200,
       msg: "success",
-      list
+      list,
     };
-  }
-
-
+  };
 }
 
 export const translationRecordController = new TranslationRecordController();

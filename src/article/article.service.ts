@@ -1,4 +1,10 @@
-import { insert, findOneByAccount, query, countQuery ,queryById} from "./article.dao";
+import {
+  insert,
+  findOneByAccount,
+  query,
+  countQuery,
+  queryById,
+} from "./article.dao";
 import { HttpError } from "../app/errors/httpErrors";
 import { compare, hash } from "../util/bcrypt";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
@@ -63,9 +69,7 @@ class ArticleService {
     };
   }
 
-  async queryById(
-    id: any,
-  ) {
+  async queryById(id: any) {
     return (await queryById(id))[0];
   }
 }

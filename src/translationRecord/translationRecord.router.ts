@@ -22,7 +22,6 @@ translationRecordRouter.post(
   translationRecordController.unStarById,
 ); //Path    Query
 
-
 translationRecordRouter.get(
   "/getAllByArticleId",
   translationRecordController.check,

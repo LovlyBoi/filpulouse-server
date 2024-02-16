@@ -16,7 +16,7 @@ import { pool } from "../app/database";
  * @returns 
  */
 export async function insert(body: any) {
-  console.log("123123",body)
+  console.log("123123", body);
   const result = (await pool.execute(
     `INSERT INTO article(create_time,title,source,author,content,tag_name,tag_color,pics,type) values (?,?,?,?,?,?,?,?,?)`,
     [
@@ -30,7 +30,7 @@ export async function insert(body: any) {
       body.pics,
       body.type,
     ],
-  )) as unknown as any[]; 
+  )) as unknown as any[];
   return result[0];
 }
 
@@ -142,11 +142,9 @@ export async function findOneByAccount(account: string) {
   return result[0];
 }
 
-
 export async function queryById(id: any) {
   const result = (await pool.execute(`select * from article where id = ?`, [
     id,
   ])) as unknown as any[];
   return result[0];
 }
-
