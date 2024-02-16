@@ -20,7 +20,8 @@ class TranslationRecordController {
   };
 
   save: Middleware = async (ctx, next) => {
-    const body = ctx.request.body;
+    let body = ctx.request.body as any;
+    body.articleId = ctx.tokenData.articleId;
     console.log('1231231',body);
     if (IsEmpty(body)) {
       throw new BussinessErrors(50004, "save参数不能为空");
