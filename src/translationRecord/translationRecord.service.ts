@@ -40,7 +40,7 @@ class TranslationRecordService {
   }
   async unStar(from :any , to:any ,articleId:any, userId: any) {
     const r = await unStar(from,to , articleId ,userId);
-    return r.affectedRows >= 1;
+    return r.affectedRows === 1;
   }
 
   async getAllByArticleId(id:any) {
