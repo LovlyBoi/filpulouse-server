@@ -9,15 +9,23 @@ export const articleUserRelationRouter = new KoaRouter({
 articleUserRelationRouter.post(
   "/save",
   articleUserRelationController.check,
-  articleUserRelationController.save,
-); //Path    Query
+  articleUserRelationController.save
+);
+
 articleUserRelationRouter.get(
   "/page",
   articleUserRelationController.check,
-  articleUserRelationController.page,
-); //Path    Query
+  articleUserRelationController.page
+);
+
 articleUserRelationRouter.get(
   "/queryByArticleId",
   articleUserRelationController.check,
-  articleUserRelationController.queryByArticleId,
-); //Path    Query
+  articleUserRelationController.queryByArticleId
+);
+
+articleUserRelationRouter.get(
+  "/queryFavorites",
+  articleUserRelationController.check,
+  articleUserRelationController.queryFavorites
+);

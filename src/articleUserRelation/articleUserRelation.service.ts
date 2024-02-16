@@ -4,6 +4,9 @@ import {
   query,
   countQuery,
   getByArticleId,
+  findFavoriteArticleIds,
+  findArticlesByIds,
+  findArticlesCountByIds,
 } from "./articleUserRelationdao";
 import { HttpError } from "../app/errors/httpErrors";
 import { compare, hash } from "../util/bcrypt";
@@ -41,6 +44,21 @@ class ArticleUserRelationService {
       pageSize: page.pageSize,
       hasNext: page.pageNumber * page.pageSize < count["count"],
       list: list,
+    };
+  }
+
+  async getFavortiesArticlesByUserId(userId: number) {
+    const res = await findFavoriteArticleIds(userId);
+    console.log(res);
+    return res.map((id: any) => id.article_id);
+  }
+
+  async getFavoritesArticlesDesc(ids: number[], ps: number, pn: number) {
+    const res = await findArticlesByIds(ids, ps, pn);
+    const [{ total }] = await findArticlesCountByIds(ids);
+    return {
+      list: res,
+      hasNext: ps * pn < total,
     };
   }
 }

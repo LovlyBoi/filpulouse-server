@@ -11,7 +11,7 @@ import { pool } from "../app/database";
 export async function insert(articleId: any, userId: any) {
   const result = (await pool.execute(
     `INSERT INTO user_article_relation(user_id,article_id,create_time) values (?,?,?)`,
-    [articleId, userId, new Date()],
+    [articleId, userId, new Date()]
   )) as unknown as any[]; // 懒得写类型，就给他强制转为any。如果你想写实体类也行
   return result[0];
 }
@@ -59,5 +59,25 @@ export async function findOneByAccount(account: string) {
   const result = (await pool.execute(`select * from user where account = ?`, [
     account,
   ])) as unknown as any[];
+  return result[0];
+}
+
+export async function findFavoriteArticleIds(userId: number) {
+  const sql = `select article_id from translation_record where user_id = ? group by article_id;`;
+  const result = (await pool.execute(sql, [userId])) as unknown as any[];
+  return result[0];
+}
+
+export async function findArticlesByIds(ids: number[], ps: number, pn: number) {
+  const placeholder = ids.map(() => "?").join(", ");
+  const sql = `select * from article where id in (${placeholder}) limit ${ps} offset ${(pn - 1) * ps};`;
+  const result = (await pool.execute(sql, ids)) as unknown as any[];
+  return result[0];
+}
+
+export async function findArticlesCountByIds(ids: number[]) {
+  const placeholder = ids.map(() => "?").join(", ");
+  const sql = `select count(*) as total from article where id in (${placeholder});`;
+  const result = (await pool.execute(sql, ids)) as unknown as any[];
   return result[0];
 }

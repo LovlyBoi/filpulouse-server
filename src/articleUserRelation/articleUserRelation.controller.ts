@@ -29,7 +29,7 @@ class ArticleUserRelationController {
     if (
       await articleUserRelationService.save(
         ctx.tokenData.userId,
-        body.articleId,
+        body.articleId
       )
     ) {
       ctx.body = { code: 200, msg: "success" };
@@ -41,12 +41,44 @@ class ArticleUserRelationController {
   queryByArticleId: Middleware = async (ctx, next) => {
     const r = await articleUserRelationService.getByArticleId(
       ctx.tokenData.userId,
-      ctx.query["articleId"],
+      ctx.query["articleId"]
     );
     ctx.body = {
       code: "200",
       msg: "success",
       data: r,
+    };
+  };
+
+  queryFavorites: Middleware = async (ctx, next) => {
+    const userId = ctx.tokenData.userId;
+    const ps = Number.parseInt((ctx.query.pageSize as string) ?? "10");
+    const pn = Number.parseInt((ctx.query.pageNumber as string) ?? "1");
+    const ids =
+      await articleUserRelationService.getFavortiesArticlesByUserId(userId);
+
+    if (ids.length === 0) {
+      ctx.body = {
+        code: 200,
+        msg: "success",
+        data: {
+          list: [],
+          hasNext: false,
+        },
+      };
+      return;
+    }
+
+    const { list, hasNext } =
+      await articleUserRelationService.getFavoritesArticlesDesc(ids, ps, pn);
+
+    ctx.body = {
+      code: 200,
+      msg: "success",
+      data: {
+        list,
+        hasNext,
+      },
     };
   };
 
@@ -58,7 +90,7 @@ class ArticleUserRelationController {
 
     const data = await articleUserRelationService.pageQuery(
       { pageSize, pageNumber },
-      ctx.query["articleId"],
+      ctx.query["articleId"]
     );
 
     ctx.body = {
