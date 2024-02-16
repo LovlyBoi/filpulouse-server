@@ -143,6 +143,23 @@ export async function findOneByAccount(account: string) {
 }
 
 
+export async function countQueryWithStar(userId:any) {
+  let sql = `select COUNT(1) 'count' from article A where A.id IN ( SELECT article_id FROM translation_record B WHERE B.user_id = ?) `;
+  const result = (await pool.execute(sql, [userId])) as unknown as any[];
+
+  
+  return result[0][0];
+}
+
+export async function queryWithStar(page: any , userId:any){
+  let sql = `select * from article A where A.id IN ( SELECT article_id FROM translation_record B WHERE B.user_id = ?)  LIMIT ?,? `;
+
+
+  const result = (await pool.query(sql, [userId , (page.pageNumber - 1) * page.pageSize   ,page.pageSize * 1])) as unknown as any[];
+  console.log(result);
+  return result[0];
+}
+
 export async function queryById(id: any) {
   const result = (await pool.execute(`select * from article where id = ?`, [
     id,
