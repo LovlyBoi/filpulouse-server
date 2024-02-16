@@ -33,10 +33,8 @@ class ArticleUserRelationService {
    */
   async pageQuery(page: any, articleId: any) {
     const count = await countQuery(articleId);
-
-    console.log(count);
     const list = await query(page, articleId);
-    console.log(list);
+
     return {
       count: count["count"],
       pageNumber: page.pageNumber,

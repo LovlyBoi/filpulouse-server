@@ -70,16 +70,6 @@ CREATE TABLE `translation_record`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of translation_record
--- ----------------------------
-INSERT INTO `translation_record` VALUES (4, '2024-02-11', 1, 'hello', '你好', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `translation_record` VALUES (5, '2024-02-11', 1, 'hello', '你好', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `translation_record` VALUES (6, '2024-02-11', 1, 'hello', '你好', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `translation_record` VALUES (8, '2024-02-11', 1, 'hello', '你好1', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `translation_record` VALUES (9, '2024-02-16', 1, 'hello', '你好1', 1, 218, 226, 'business', 1, 1, '/ˈbɪznəs/', 'n.事务', 'the activity of making, buying, selling or supplying goods or services for money', 'What she does to relax herself is her own business.', '她做什么来放松是她自己的事。', '', '');
-INSERT INTO `translation_record` VALUES (10, '2024-02-16', 1, 'hello', '你好1', 1, 218, 226, 'business', 1, 1, '/ˈbɪznəs/', 'n.事务', 'the activity of making, buying, selling or supplying goods or services for money', 'What she does to relax herself is her own business.', '她做什么来放松是她自己的事。', '', '');
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -95,15 +85,6 @@ CREATE TABLE `user`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (1, 'admin', '$2a$10$3sudGTdcOPbmSVG26NKxJucb8jtSr8xLeHOomlkJubc/PHbxdziky', '2024-02-11', 1, '管理员');
-INSERT INTO `user` VALUES (2, 'abc', '$2a$10$tMDypXgHjDhn7wsK2PP9z.VUWEAsY6iTTtuxN0Pw3mjGVXntcCjIm', '2024-02-11', 1, '测试1');
-INSERT INTO `user` VALUES (7, 'ab111c', '$2a$10$cYoPqkbiIsALUy5HYbJ3detRhbpLQ2k5GzGCoFDcFRMQkLCuj2qqa', '2024-02-11', 1, '测试2');
-INSERT INTO `user` VALUES (9, 'ab1111111c', '$2a$10$uYkbdnkgpp1NtxDkNFTKieKK17QOS/UGW9VobRp/LsCZLK4Jzm4Wi', '2024-02-13', 1, NULL);
-INSERT INTO `user` VALUES (10, 'ab111111111c', '$2a$10$J6rYmQjmzxGQuZ0pATHR3OcM/Ald6muuW48FSEISXfoC9QpK6pFLq', '2024-02-13', 1, NULL);
-
--- ----------------------------
 -- Table structure for user_article_relation
 -- ----------------------------
 DROP TABLE IF EXISTS `user_article_relation`;
@@ -113,11 +94,5 @@ CREATE TABLE `user_article_relation`  (
   `create_time` date NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`, `article_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user_article_relation
--- ----------------------------
-INSERT INTO `user_article_relation` VALUES (1, 1, '2024-02-11');
-INSERT INTO `user_article_relation` VALUES (1, 2, '2024-02-11');
 
 SET FOREIGN_KEY_CHECKS = 1;
