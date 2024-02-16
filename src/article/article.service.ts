@@ -1,10 +1,4 @@
-import {
-  insert,
-  findOneByAccount,
-  query,
-  countQuery,
-  queryById,
-} from "./article.dao";
+import { insert, findOneByAccount, query, countQuery, queryById ,countQueryWithStar,queryWithStar} from "./article.dao";
 import { HttpError } from "../app/errors/httpErrors";
 import { compare, hash } from "../util/bcrypt";
 import { BussinessErrors } from "../app/errors/BussinsessErrors";
@@ -72,6 +66,24 @@ class ArticleService {
   async queryById(id: any) {
     return (await queryById(id))[0];
   }
+
+
+  async pageQueryWithStar(page: any,userId: any) {
+
+    const count = await countQueryWithStar(userId);
+
+    const list = await queryWithStar(page,userId);
+
+    
+    return {
+      count: count["count"],
+      pageNumber: page.pageNumber,
+      pageSize: page.pageSize,
+      hasNext: page.pageNumber * page.pageSize < count["count"],
+      list: list,
+    };
+  }
+
 }
 
 export const articleService = new ArticleService();

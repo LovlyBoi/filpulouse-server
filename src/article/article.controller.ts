@@ -50,6 +50,29 @@ class ArticleController {
     };
   };
 
+
+  getAllArticlesWithStar: Middleware = async (ctx, next) => {
+
+    let pageSize = ctx.query["pageSize"];
+    pageSize == null ? 10 : pageSize;
+    let pageNumber = ctx.query["pageNumber"];
+    pageNumber == null ? 0 : pageNumber;
+
+    const data = await articleService.pageQueryWithStar(
+      { pageSize, pageNumber },
+      ctx.tokenData.userId,
+    );
+
+    console.log(data)
+
+    ctx.body = {
+      code: 200,
+      msg: "success",
+      data,
+    };
+
+  }
+
   page: Middleware = async (ctx, next) => {
     let pageSize = ctx.query["pageSize"];
     pageSize == null ? 10 : pageSize;
