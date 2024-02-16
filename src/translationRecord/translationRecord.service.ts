@@ -4,10 +4,8 @@ import {
   query,
   countQuery,
   unStar,
+  getAllByArticleId
 } from "./translationRecord.dao";
-import { HttpError } from "../app/errors/httpErrors";
-import { compare, hash } from "../util/bcrypt";
-import { BussinessErrors } from "../app/errors/BussinsessErrors";
 
 class TranslationRecordService {
   getByAccount(id: string) {
@@ -31,7 +29,7 @@ class TranslationRecordService {
     const count = await countQuery(userId, start, end);
 
     const list = await query(page, userId, start, end);
-    console.log(list);
+    
     return {
       count: count["count"],
       pageNumber: page.pageNumber,
@@ -44,6 +42,11 @@ class TranslationRecordService {
     const r = await unStar(translationRecordId, userId);
     return r.affectedRows === 1;
   }
+
+  async getAllByArticleId(id:any) {
+    return await getAllByArticleId(id);
+  }
+  
 }
 
 export const translationRecordService = new TranslationRecordService();

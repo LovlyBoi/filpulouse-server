@@ -63,6 +63,20 @@ class TranslationRecordController {
       msg: "success",
     };
   };
+
+  getAllByArticleId: Middleware = async (ctx, next) => {
+
+    let list = await translationRecordService.getAllByArticleId(ctx.query['articleId'])
+
+    console.log('await',list)
+    ctx.body = {
+      code: 200,
+      msg: "success",
+      list
+    };
+  }
+
+
 }
 
 export const translationRecordController = new TranslationRecordController();

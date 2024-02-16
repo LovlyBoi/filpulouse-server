@@ -21,3 +21,10 @@ translationRecordRouter.post(
   translationRecordController.check,
   translationRecordController.unStarById,
 ); //Path    Query
+
+
+translationRecordRouter.get(
+  "/getAllByArticleId",
+  translationRecordController.check,
+  translationRecordController.getAllByArticleId,
+); //Path    Query
