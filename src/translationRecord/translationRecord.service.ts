@@ -38,9 +38,9 @@ class TranslationRecordService {
       list: list,
     };
   }
-  async unStar(translationRecordId: any, userId: any) {
-    const r = await unStar(translationRecordId, userId);
-    return r.affectedRows === 1;
+  async unStar(from :any , to:any ,articleId:any, userId: any) {
+    const r = await unStar(from,to , articleId ,userId);
+    return r.affectedRows >= 1;
   }
 
   async getAllByArticleId(id:any) {

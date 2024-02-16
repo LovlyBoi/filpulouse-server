@@ -21,7 +21,25 @@ import { pool } from "../app/database";
  */
 export async function insert(body: any) {
 
-
+  console.log([
+    new Date(),
+    body.articleId,
+    body.originStatement,
+    body.result,
+    body.userId,
+    body.translation.from,
+    body.translation.to,
+    body.translation.word,
+    body.translation.index,
+    body.translation.success,
+    body.translation.accent,
+    body.translation.mean_cn,
+    body.translation.mean_en,
+    body.translation.sentence,
+    body.translation.sentence_trans,
+    body.translation.sentence_phrase,
+    body.translation.word_etyma
+  ])
   const result = (await pool.execute(
     'INSERT INTO translation_record(`create_time`,`article_id`,`origin_statement`,`result`,`user_id`,`from`,`to`,`word`,`index`,`success`,`accent`,`mean_cn`,`mean_en`,`sentence`,`sentence_trans`,`sentence_phrase`,`word_etyma`) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
     [
@@ -102,10 +120,10 @@ export async function countQuery(userId: any, start: any, end: any) {
   return result[0][0];
 }
 
-export async function unStar(translationRecordId: any, userId: any) {
+export async function unStar(from :any , to:any ,articleId:any, userId: any) {
   const result = (await pool.execute(
-    `DELETE from translation_record where id = ? AND user_id = ? `,
-    [translationRecordId, userId],
+    `DELETE from translation_record where \`from\` = ? AND \`to\`=? AND article_id = ? AND user_id = ? `,
+    [from,to,articleId, userId],
   )) as unknown as any[];
   return result[0];
 }
