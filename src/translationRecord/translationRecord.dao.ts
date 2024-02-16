@@ -1,7 +1,6 @@
 import { IsEmpty } from "../util/StringUtils";
 import { pool } from "../app/database";
 
-
 /**
  * 
  * @param body  
@@ -20,7 +19,6 @@ import { pool } from "../app/database";
  * @returns 
  */
 export async function insert(body: any) {
-
   console.log([
     new Date(),
     body.articleId,
@@ -38,10 +36,10 @@ export async function insert(body: any) {
     body.translation.sentence,
     body.translation.sentence_trans,
     body.translation.sentence_phrase,
-    body.translation.word_etyma
-  ])
+    body.translation.word_etyma,
+  ]);
   const result = (await pool.execute(
-    'INSERT INTO translation_record(`create_time`,`article_id`,`origin_statement`,`result`,`user_id`,`from`,`to`,`word`,`index`,`success`,`accent`,`mean_cn`,`mean_en`,`sentence`,`sentence_trans`,`sentence_phrase`,`word_etyma`) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    "INSERT INTO translation_record(`create_time`,`article_id`,`origin_statement`,`result`,`user_id`,`from`,`to`,`word`,`index`,`success`,`accent`,`mean_cn`,`mean_en`,`sentence`,`sentence_trans`,`sentence_phrase`,`word_etyma`) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
     [
       new Date(),
       body.articleId,
@@ -59,7 +57,7 @@ export async function insert(body: any) {
       body.translation.sentence,
       body.translation.sentence_trans,
       body.translation.sentence_phrase,
-      body.translation.word_etyma
+      body.translation.word_etyma,
     ],
   )) as unknown as any[]; // 懒得写类型，就给他强制转为any。如果你想写实体类也行
   return result[0];
@@ -84,11 +82,11 @@ export async function query(page: any, userId: any, start: any, end: any) {
 
   const arr = [] as any[];
 
-  for(let i =0 ; i < result[0].length ; i ++ ) {
+  for (let i = 0; i < result[0].length; i++) {
     arr[i] = {};
     arr[i].article_id = result[0][i].article_id;
     arr[i].translation = {};
-    
+
     arr[i].translation.from = result[0][i].from;
     arr[i].translation.to = result[0][i].to;
     arr[i].translation.word = result[0][i].word;
@@ -118,10 +116,10 @@ export async function countQuery(userId: any, start: any, end: any) {
   return result[0][0];
 }
 
-export async function unStar(from :any , to:any ,articleId:any, userId: any) {
+export async function unStar(from: any, to: any, articleId: any, userId: any) {
   const result = (await pool.execute(
     `DELETE from translation_record where \`from\` = ? AND \`to\`=? AND article_id = ? AND user_id = ? `,
-    [from,to,articleId, userId],
+    [from, to, articleId, userId],
   )) as unknown as any[];
   return result[0];
 }
@@ -133,18 +131,15 @@ export async function getAllByArticleId(id: any) {
     [id],
   )) as unknown as any[];
 
-
-  console.log(result[0])
+  console.log(result[0]);
 
   const arr = [] as any[];
 
-  for(let i =0 ; i < result[0].length ; i ++ ) {
-    
-
+  for (let i = 0; i < result[0].length; i++) {
     arr[i] = {};
     arr[i].articleId = result[0][i].article_id;
     arr[i].translation = {};
-    
+
     arr[i].translation.from = result[0][i].from;
     arr[i].translation.accent = result[0][i].accent;
     arr[i].translation.to = result[0][i].to;
@@ -158,7 +153,6 @@ export async function getAllByArticleId(id: any) {
     arr[i].translation.sentence_phrase = result[0][i].sentence_phrase;
   }
   return arr;
-
 }
 export async function findOneByAccount(account: string) {
   const result = (await pool.execute(`select * from user where account = ?`, [

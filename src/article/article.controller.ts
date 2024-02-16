@@ -33,21 +33,21 @@ class ArticleController {
   };
 
   queryById: Middleware = async (ctx, next) => {
-    console.log(11111,ctx.query["id"])
-    const r = await articleService.queryById(ctx.query['id']);
-    if (!IsEmpty(r)){
+    console.log(11111, ctx.query["id"]);
+    const r = await articleService.queryById(ctx.query["id"]);
+    if (!IsEmpty(r)) {
       ctx.body = {
-        code:200,
-        message:"success",
-        data:r
-      }
+        code: 200,
+        message: "success",
+        data: r,
+      };
       return;
     }
     ctx.body = {
-      code:50010,
-      message:"no article with such id",
-      data:null
-    }
+      code: 50010,
+      message: "no article with such id",
+      data: null,
+    };
   };
 
 

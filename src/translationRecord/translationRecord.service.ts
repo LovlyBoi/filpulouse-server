@@ -4,7 +4,7 @@ import {
   query,
   countQuery,
   unStar,
-  getAllByArticleId
+  getAllByArticleId,
 } from "./translationRecord.dao";
 
 class TranslationRecordService {
@@ -29,7 +29,7 @@ class TranslationRecordService {
     const count = await countQuery(userId, start, end);
 
     const list = await query(page, userId, start, end);
-    
+
     return {
       count: count["count"],
       pageNumber: page.pageNumber,
@@ -38,15 +38,14 @@ class TranslationRecordService {
       list: list,
     };
   }
-  async unStar(from :any , to:any ,articleId:any, userId: any) {
-    const r = await unStar(from,to , articleId ,userId);
+  async unStar(from: any, to: any, articleId: any, userId: any) {
+    const r = await unStar(from, to, articleId, userId);
     return r.affectedRows === 1;
   }
 
-  async getAllByArticleId(id:any) {
+  async getAllByArticleId(id: any) {
     return await getAllByArticleId(id);
   }
-  
 }
 
 export const translationRecordService = new TranslationRecordService();

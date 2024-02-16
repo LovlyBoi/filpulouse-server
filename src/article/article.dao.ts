@@ -16,7 +16,7 @@ import { pool } from "../app/database";
  * @returns 
  */
 export async function insert(body: any) {
-  console.log("123123",body)
+  console.log("123123", body);
   const result = (await pool.execute(
     `INSERT INTO article(create_time,title,source,author,content,tag_name,tag_color,pics,type) values (?,?,?,?,?,?,?,?,?)`,
     [
@@ -30,7 +30,7 @@ export async function insert(body: any) {
       body.pics,
       body.type,
     ],
-  )) as unknown as any[]; 
+  )) as unknown as any[];
   return result[0];
 }
 
@@ -142,7 +142,6 @@ export async function findOneByAccount(account: string) {
   return result[0];
 }
 
-
 export async function countQueryWithStar(userId:any) {
   let sql = `select COUNT(1) 'count' from article A where A.id IN ( SELECT article_id FROM translation_record B WHERE B.user_id = ?) `;
   const result = (await pool.execute(sql, [userId])) as unknown as any[];
@@ -166,4 +165,3 @@ export async function queryById(id: any) {
   ])) as unknown as any[];
   return result[0];
 }
-

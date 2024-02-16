@@ -1,5 +1,5 @@
 import Koa from "koa";
-import cors from '@koa/cors'
+import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 import { registRoutes } from "./registRoutes";
 import { errorHandler } from "./errors/errorHandler";

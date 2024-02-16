@@ -63,9 +63,7 @@ class ArticleService {
     };
   }
 
-  async queryById(
-    id: any,
-  ) {
+  async queryById(id: any) {
     return (await queryById(id))[0];
   }
 
