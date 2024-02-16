@@ -67,8 +67,6 @@ export async function query(page: any, userId: any, start: any, end: any) {
   const arr = [] as any[];
 
   for(let i =0 ; i < result[0].length ; i ++ ) {
-    
-
     arr[i] = {};
     arr[i].article_id = result[0][i].article_id;
     arr[i].translation = {};
@@ -126,7 +124,7 @@ export async function getAllByArticleId(id: any) {
     
 
     arr[i] = {};
-    arr[i].article_id = result[0][i].article_id;
+    arr[i].articleId = result[0][i].article_id;
     arr[i].translation = {};
     
     arr[i].translation.from = result[0][i].from;
